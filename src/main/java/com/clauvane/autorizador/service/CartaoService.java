@@ -15,6 +15,7 @@ public class CartaoService {
     @Autowired
     private CartaoRepository cartaoRepository;
 
+    @Transactional
     public Cartao saveOrUpdate(Cartao cartao) {
         return cartaoRepository.save(cartao);
     }

@@ -1,6 +1,5 @@
 package com.clauvane.autorizador.controller;
 
-import com.clauvane.autorizador.exception.ResourceNotFoundException;
 import com.clauvane.autorizador.model.dto.CartaoDto;
 import com.clauvane.autorizador.model.entity.Cartao;
 import com.clauvane.autorizador.service.CartaoService;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 

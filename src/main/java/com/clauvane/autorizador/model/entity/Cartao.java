@@ -14,7 +14,7 @@ public class Cartao {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 16)
     private String numeroCartao;
 
     @Column(nullable = false, length = 20)

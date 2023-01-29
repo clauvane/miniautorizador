@@ -45,29 +45,26 @@ class CartaoControllerTest {
 
     @Test
     void deveriaPegarCartaoPeloNumero() throws Exception {
-        when(cartaoService.findByNumeroCartao("12345678901234567890"))
+        when(cartaoService.findByNumeroCartao("5544618566894276"))
                 .thenReturn(Optional.of(new Cartao()));
-        this.mockMvc.perform(
-                get(BASE_URL + "/12345678901234567890")
-                        .contentType("application/json")
+        this.mockMvc.perform(get(BASE_URL + "/5544618566894276")
+                    .contentType("application/json")
         ).andExpect(status().isOk());
     }
 
     @Test
     void deveriaPegarTodosCartoes() throws Exception {
         when(cartaoService.findAll()).thenReturn(List.of(CartaoMock.getSample()));
-        this.mockMvc.perform(
-                get(BASE_URL)
-                        .contentType("application/json")
+        this.mockMvc.perform(get(BASE_URL)
+                    .contentType("application/json")
         ).andExpect(status().isOk());
     }
 
     @Test
     void deveriaSalvarCartaoComSucesso() throws Exception {
-        this.mockMvc.perform(
-                post(BASE_URL)
-                        .contentType("application/json")
-                        .content(mapper.writeValueAsString(CartaoMock.getSample2()))
+        this.mockMvc.perform(post(BASE_URL)
+                    .contentType("application/json")
+                    .content(mapper.writeValueAsString(CartaoMock.getSample2()))
         ).andExpect(status().isCreated());
     }
 

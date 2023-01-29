@@ -11,7 +11,7 @@ public class CartaoMock {
 
     public static Cartao getSample() {
         Cartao cartao = new Cartao();
-        cartao.setNumeroCartao("12345678901234567890");
+        cartao.setNumeroCartao("5544618566894276");
         cartao.setSaldo(new BigDecimal("500.00"));
         cartao.setSenha("12345678");
 
@@ -20,7 +20,7 @@ public class CartaoMock {
 
     public static Cartao getSample2() {
         Cartao cartao = new Cartao();
-        cartao.setNumeroCartao("12345678901234567890");
+        cartao.setNumeroCartao("5544615311311424");
         cartao.setSaldo(new BigDecimal("1000.00"));
         cartao.setSenha("123456789");
 

@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 public class CartaoDto {
 
     @NotBlank(message = "O número do cartão é obrigatório.")
-    @Size(min = 20, max = 20, message = "O cartão deve possuir 20 caracteres.")
+    @Size(min = 16, max = 16, message = "O cartão deve possuir 16 caracteres.")
     private String numeroCartao;
 
     @NotBlank(message = "A senha é obrigatória.")

@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class AutorizadorApplication {
+public class MiniAutorizadorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AutorizadorApplication.class, args);
+		SpringApplication.run(MiniAutorizadorApplication.class, args);
 	}
 
 	@GetMapping("/")

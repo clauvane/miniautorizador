@@ -68,3 +68,7 @@ curl --location --request POST 'http://localhost:8080/transacoes/recarga' \
     "saldo": 10
 }'
 ```
+
+## Documentação
+
+* [Documentação Swagger](http://localhost:8080/swagger-ui/index.html)

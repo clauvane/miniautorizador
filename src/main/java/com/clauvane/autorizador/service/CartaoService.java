@@ -15,14 +15,8 @@ public class CartaoService {
     @Autowired
     private CartaoRepository cartaoRepository;
 
-    @Transactional
     public Cartao saveOrUpdate(Cartao cartao) {
         return cartaoRepository.save(cartao);
-    }
-
-    @Transactional
-    public void delete(Cartao cartao) {
-        cartaoRepository.delete(cartao);
     }
 
     public List<Cartao> findAll() {
@@ -36,4 +30,9 @@ public class CartaoService {
     public Optional<Cartao> findByNumeroCartao(String numeroCartao) {
         return cartaoRepository.findByNumeroCartao(numeroCartao);
     }
+
+    public Optional<Cartao> findByNumeroCartaoWithPessimisticLock(String numeroCartao) {
+        return cartaoRepository.findByNumeroCartaoWithPessimisticLock(numeroCartao);
+    }
+
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -28,9 +29,10 @@ public class TransacaoController {
     @Autowired
     private CartaoService cartaoService;
 
+    @Transactional
     @PostMapping
-    public ResponseEntity<Object> efetivarTransacao(@RequestBody @Valid TransacaoDto transacaoDto){
-        Optional<Cartao> cartaoDb = cartaoService.findByNumeroCartao(transacaoDto.getNumeroCartao());
+    public ResponseEntity<Object> debitar(@RequestBody @Valid TransacaoDto transacaoDto){
+        Optional<Cartao> cartaoDb = cartaoService.findByNumeroCartaoWithPessimisticLock(transacaoDto.getNumeroCartao());
         if (!cartaoDb.isPresent()) {
             return status(HttpStatus.UNPROCESSABLE_ENTITY).body(CARTAO_INEXISTENTE);
         }
@@ -45,6 +47,21 @@ public class TransacaoController {
         }
 
         cartao.setSaldo(cartao.getSaldo().subtract(transacaoDto.getSaldo()));
+
+        cartaoService.saveOrUpdate(cartao);
+        return status(HttpStatus.CREATED).body("OK");
+    }
+
+    @Transactional
+    @PostMapping("/recarga")
+    public ResponseEntity<Object> recarga(@RequestBody @Valid TransacaoDto transacaoDto){
+        Optional<Cartao> cartaoDb = cartaoService.findByNumeroCartaoWithPessimisticLock(transacaoDto.getNumeroCartao());
+        if (!cartaoDb.isPresent()) {
+            return status(HttpStatus.UNPROCESSABLE_ENTITY).body(CARTAO_INEXISTENTE);
+        }
+
+        Cartao cartao = cartaoDb.get();
+        cartao.setSaldo(cartao.getSaldo().add(transacaoDto.getSaldo()));
 
         cartaoService.saveOrUpdate(cartao);
         return status(HttpStatus.CREATED).body("OK");
